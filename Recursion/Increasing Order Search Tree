@@ -1,0 +1,28 @@
+class Solution {
+public:
+    TreeNode* current=NULL;
+    TreeNode* increasingBST(TreeNode* root) {
+        
+        if(root==NULL){return NULL;}
+        TreeNode* result = new TreeNode(0);
+        current = result;
+        inorder(root);
+        return result->right;
+        
+    }
+    void inorder(TreeNode*root){
+        
+        if(root==NULL){
+            return;
+        }
+        
+        inorder(root->left);
+        
+        root->left = NULL;
+        current->right = root;
+        current = root;
+        
+        inorder(root->right);
+        
+    }
+};
