@@ -1,0 +1,61 @@
+APPROACH(1)-USING SORTING
+
+T.C-O(nlogn)
+S.C-O(1)
+
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        while(stones.size()>1)
+        {
+            sort(stones.begin(),stones.end(),greater<int>());
+            if(stones[0]==stones[1]){
+                stones.erase(stones.begin(),stones.begin()+2);
+            }
+            
+            else{
+                stones.push_back(abs(stones[0]-stones[1]));
+            stones.erase(stones.begin(),stones.begin()+2);
+            }
+            
+}
+        if(!stones.empty())
+            return stones[0];
+        return 0;
+    }
+};
+
+Approach-2(Using min Heap)
+
+T.C-O(n)
+S.C-O(n)
+
+lass Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        priority_queue<int>h_max;
+        for(int i=0;i<stones.size();i++)
+        {
+            h_max.push(stones[i]);
+        }
+        int a,b;
+        while(!h_max.empty())
+        {
+            if(h_max.size()==1)
+               return h_max.top();
+            
+             a=h_max.top();
+              h_max.pop();
+            
+            b=h_max.top();
+             h_max.pop();
+            
+            if(a!=b)
+                h_max.push(a-b);
+            
+    
+        }
+            
+        return 0;
+    }
+};
