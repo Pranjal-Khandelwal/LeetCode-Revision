@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int count=0;
+    int ans=INT_MIN;
+    int kthSmallest(TreeNode* root, int k) {
+        kthSmallestUtil(root,k);
+        return ans;
+    }
+    void kthSmallestUtil(TreeNode* root,int k)
+    {
+        if(root==NULL)
+            return;
+        kthSmallestUtil(root->left,k);
+        count++;
+        
+        if(count==k)
+            ans=root->val;
+        
+        kthSmallestUtil(root->right,k);
+        
+        
+    }
+};
