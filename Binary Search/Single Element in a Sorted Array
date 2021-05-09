@@ -1,4 +1,20 @@
-Approach-1 ( Using XOR Operator)
+Approach-1)(Brute Force)
+T.C-O(n)
+S.C-O(1)
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+       int ans=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+           if(nums[i]!=nums[i+1] && nums[i]!=nums[i-1])
+               ans=nums[i];
+        }
+        return ans;
+    }
+};
+
+Approach-2 ( Using XOR Operator)
 T.C.=O(n)
 S.C=O(1)
 
