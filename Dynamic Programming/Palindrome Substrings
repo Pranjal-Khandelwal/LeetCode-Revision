@@ -1,5 +1,5 @@
-Approach-1(Recursion Solution)
-T.C-O(N)
+Approach-1(Brute Force Approach)
+T.C-O(N^2)
 S.C-O(1)
 Class Solution {
 public:
