@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int sum=0;
+     int sumEvenGrandparent(TreeNode* root) {
+     EvenValuedGrandparent(root,NULL,NULL);
+        return sum;
+        
+    }
+    void EvenValuedGrandparent(TreeNode* root,TreeNode* p,TreeNode* gp)
+    {
+        if(!root)
+            return;
+        if(gp!=NULL && gp->val%2==0)
+            sum+=root->val;
+            
+        EvenValuedGrandparent(root->left,root,p);
+        EvenValuedGrandparent(root->right,root,p);
+    }
+    
+    
+};
