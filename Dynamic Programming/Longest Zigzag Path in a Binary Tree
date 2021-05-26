@@ -1,0 +1,38 @@
+class Solution {
+
+    int ans = 0;
+
+public:
+
+    int longestZigZag(TreeNode* root) {
+
+        ZigZagPath(root, false); // could be either true or false
+
+        return ans;
+
+    }
+
+    
+
+    int ZigZagPath(TreeNode* root, bool isLeft) {
+
+        if (!root) return -1;
+
+        
+
+        int left = ZigZagPath(root->left, false);
+
+        int right = ZigZagPath(root->right, true);
+        
+        int temp=max(left+1,right+1);
+          ans = max(ans,temp);
+        
+        if(isLeft)
+            return (left+1);
+        else
+            return (right+1);
+            
+
+    }
+
+};
