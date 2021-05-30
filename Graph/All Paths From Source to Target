@@ -1,0 +1,24 @@
+Time Complexity-(N+E)
+S.C-O(N)
+
+class Solution {
+public:
+    
+    void dfs(vector<vector<int>>& graph, vector<vector<int>>& res, vector<int> path, int src, int dst) {
+    path.push_back(src);
+    if(src == dst) {
+        res.push_back(path);
+    }
+
+    for(auto node : graph[src])
+        dfs(graph, res, path, node, dst);
+}
+vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+    vector<vector<int>> paths; vector<int> path;
+    int n = graph.size();
+    if(n == 0) return paths;
+    dfs(graph, paths, path, 0, n - 1);
+    return paths;
+}
+    
+};
