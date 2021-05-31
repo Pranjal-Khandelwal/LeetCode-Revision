@@ -1,0 +1,24 @@
+class Solution {
+public:
+ static bool compare(vector<int>v1,vector<int>v2){
+        return v1[1]<v2[1];
+        }
+    
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(),pairs.end(),compare);
+        int n=pairs.size();
+        int i=0;
+        int len=1;
+        
+        for(int j=1;j<n;j++)
+            {
+            if(pairs[i][1]<pairs[j][0]){
+                i=j;
+                len++;
+            }
+            }
+        return len;
+        
+        
+    }
+};
