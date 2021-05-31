@@ -1,0 +1,29 @@
+Time Complexity-O(klogk)
+Space  Complexity-O(N)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int>v(k);
+        
+        unordered_map<int,int>mp;
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            mp[nums[i]]++;
+        }
+        
+    priority_queue<pair<int, int>> maxheap;
+        
+        for(auto store:mp){
+            maxheap.push(make_pair(store.second,store.first));
+        }
+        
+                for(int i=0;i<k;i++)
+                {
+                    v[i]=maxheap.top().second;
+                    maxheap.pop();
+                }
+            return v;
+    }
+};
