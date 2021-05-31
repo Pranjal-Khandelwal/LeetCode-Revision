@@ -1,0 +1,27 @@
+T.C-O(logn)
+S.C-O(1)
+
+class Solution {
+public:
+    int maxi=0;
+    int longestZigZag(TreeNode* root) {
+       ZigZagPath(root->left,1,1);
+        ZigZagPath(root->right,0,1);
+    }
+    void ZigZagPath(TreeNode *root,bool isLeft,int height)
+    {
+        if(root==NULL)
+            return;
+        maxi=max(maxi,height);
+        
+        if(isLeft)
+        {
+            ZigZagPath(root->left,1,1);
+            ZigZagPath(root->right,0,height+1);
+        }
+        else{
+            ZigZagPath(root->left,0,height+1);
+            ZigZagPath(root->right,1,1);
+        }
+    }
+};
