@@ -1,4 +1,45 @@
-Approach-1(using set)
+Approach-1(using two pointers)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        
+        vector<int>v;
+        int n=(int)nums1.size();
+        int m=(int)nums2.size();
+        int i=0;
+        int j=0;
+        while(i<n && j<m)
+        {
+            if(nums1[i]==nums2[j]){
+                v.push_back(nums1[i]);
+            i++;
+            j++;
+            }
+            else if(nums1[i]>nums2[j]){
+                j++;
+            }
+            else{
+                i++;
+            }
+            while(i>0 && i<n && nums1[i]==nums1[i-1]){
+                i++;
+            }
+            while(j>0 && j<m && nums2[j]==nums2[j-1]){
+                j++;
+        }
+        }
+        return v;
+        
+    }
+};
+
+Approach-2(using set)
 T.C-O(logN)
 S.C-O(N)
 
