@@ -1,0 +1,35 @@
+Approach-1(Recursion)
+T.C-O(2^N)
+S.C-O(1)
+
+class Solution {
+public:
+    int CoinChangeDemo(vector<int>& coins,int n,int amount)
+    {
+        if(amount==0)
+            return 0;
+        
+        if(amount<0)
+         return 100005;
+        
+        if(n==0)
+		return  100005;
+        
+            if(coins[n-1]<=amount){
+             return min(CoinChangeDemo(coins,n-1,amount),1+CoinChangeDemo(coins,n,amount-coins[n-1]));   
+            }
+           
+                else{
+                    return CoinChangeDemo(coins,n-1,amount);
+                }
+        }
+        
+    int coinChange(vector<int>& coins, int amount) {
+        int ans=CoinChangeDemo(coins,coins.size(),amount);
+        
+        if(ans==100005)
+            return -1;
+        else
+            return ans;
+    }
+};
