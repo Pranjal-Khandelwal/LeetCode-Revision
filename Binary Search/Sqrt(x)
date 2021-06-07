@@ -1,3 +1,25 @@
+Approach-1(Brute Force)
+T.C-O(x)
+S.C-O(1)
+
+class Solution {
+public:
+    int mySqrt(int x) {
+        if(x==0 || x==1)
+            return x;
+        
+        long long  i=1;
+        long long res=1;
+        
+        while(res<=x){
+            i++;
+        res=i*i;
+    }
+    return i-1;
+}
+};
+
+
 Approach-2(Binary Search)
 T.C-O(logx)
 S.C-O(1)
