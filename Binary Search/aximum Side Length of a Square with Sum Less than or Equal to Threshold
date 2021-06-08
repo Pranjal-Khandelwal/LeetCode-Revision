@@ -1,0 +1,53 @@
+T.C-O(mnlog(min(m,n))
+S.C-o(m*n)
+
+class Solution {
+     
+    int n,m;
+public:
+    int maxSideLength(vector<vector<int>>& mat, int threshold) {
+        
+        if(mat.empty()) return 0;
+        
+        n=mat.size();
+        m=mat[0].size();
+        
+        int low=0,high=min(m,n);
+        int ans=0;
+        
+        vector<vector<int>> sum(n+1,vector<int>(m+1,0));
+        
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                sum[i][j]=(i-1<=0?0:sum[i-1][j])+(j-1<=0?0:sum[i][j-1])-(i-1<=0||j-1<=0?0:sum[i-1][j-1])+(i-1<0||j-1<0?0:mat[i-1][j-1]);
+            }
+        }
+        
+        while(low<=high)
+        {
+            int mid=low+(high-low)/2;
+            if(helper(sum,mid,threshold))
+            {
+                ans=mid; low=mid+1;
+            }
+            else high=mid-1;
+        }
+        
+        return ans;
+    }
+    
+    bool helper(vector<vector<int>>& sum,int len,int threshold)
+    {
+        for(int i=len;i<=n;i++)
+        {
+            for(int j=len;j<=m;j++)
+            {
+                if(sum[i][j]-(i-len<=0?0:sum[i-len][j])-(j-len<=0?0:sum[i][j-len])+(i-len<=0||j-len<=0?0:sum[i-len][j-len])<=threshold) return true;
+            }
+        }
+        
+        return false;
+    }
+};
