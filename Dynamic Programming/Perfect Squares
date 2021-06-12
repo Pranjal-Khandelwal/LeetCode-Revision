@@ -1,0 +1,56 @@
+Approach-1(Recursion)
+T.C-O(N*2^N)
+S.C-O(1)
+
+class Solution {
+public:
+    int numSquares(int n) {
+        
+        int ans=INT_MAX;
+        
+        if(n<=3){
+            return n;
+        }
+        
+        for(int i=1;i*i<=n;i++)
+        {
+            ans=min(ans,1+numSquares(n-i*i));
+        }
+        return ans;
+    }
+    
+};
+
+
+
+
+Aproach-2(DP-memoization)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    unordered_map<int,int>mp;
+    int numSquare_memo(int n)
+    {
+         if(mp.find(n)!=mp.end())
+             return mp[n];
+        
+        if(n<=3)
+            return n;
+        
+        int ans=INT_MAX;
+        
+        
+        for(int i=1;i*i<=n;i++)
+        {
+            ans=min(ans,1+numSquares(n-i*i));
+        }
+        mp[n]=ans;
+        return ans;
+    }
+    int numSquares(int n) {
+       return numSquare_memo(n);
+    }
+    
+};
