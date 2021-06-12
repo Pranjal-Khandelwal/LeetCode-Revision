@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int maxSumDivThree(vector<int>& nums) {
+        int n=nums.size();
+        int rem1=10001;     //if remainder is 1
+        int rem2=10001;     // if the remainder is 2
+        
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+    
+        
+        if(nums[i]%3==1) //if element is not divded by 3 
+            rem2 = min(rem1+nums[i],rem2),rem1= min(rem1,nums[i]);
+        
+        
+        if(nums[i]%3==2) // if sum is divisible by 3
+            rem1 = min(rem2+nums[i],rem1),rem2= min(rem2,nums[i]);
+            
+    }
+    
+   if(sum%3==0)
+       return sum;
+    else{
+        if(sum%3==1){
+            return sum-rem1;
+        }
+        else{
+            return sum-rem2;
+        }
+    }
+        
+    }
+};
