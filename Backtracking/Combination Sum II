@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void helper(vector<int>& nums,int start,int target,vector<vector<int>>& res,vector<int>& ans)
+    {
+            if(target==0){
+            res.push_back(ans);
+            return ;
+        }
+        for(int i=start;i<nums.size();i++)
+        {
+            if(i>start && nums[i]==nums[i-1])
+                continue;
+            if(nums[i]>target)
+                break;
+             ans.push_back(nums[i]);
+            helper(nums,i+1,target-nums[i],res,ans);
+            ans.pop_back();
+        }
+        
+        }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<vector<int>>res;
+        vector<int>ans;
+        helper(candidates,0,target,res,ans);
+        return res;
+    }
+};
