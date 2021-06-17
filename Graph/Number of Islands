@@ -1,7 +1,5 @@
 Approach-1(Using DFS)
 T.C.-O(M*N)
-S.C-O(1)
-
 
 class Solution {
 public:
@@ -33,5 +31,87 @@ public:
         }
             return islands;
         
+    }
+};
+
+Approach-2(Using BFS)
+T.C-O(M*N)
+
+
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int islands = 0; 
+        
+      
+        for(int i=0; i<grid.size(); i++)
+        {
+            for(int j=0; j<grid[i].size(); j++)
+            {
+               
+                if(grid[i][j] == '1')
+                {
+                    islands++;
+                    
+                  
+                    queue<pair<int,int>> q; 
+                    q.push({i,j});
+                    
+                    
+                    while(!q.empty())
+                    {
+                        pair<int, int> current = q.front();
+                        int x = current.first;
+                        int y = current.second;
+                        
+
+                        if(x < grid.size()-1)
+                        {
+                            if(grid[x+1][y] == '1')
+                            {
+                                q.push({x+1,y});
+                                grid[x+1][y] = '0';
+                            }
+                        }
+                        
+                        if(x > 0)
+                        {
+                            if(grid[x-1][y] == '1')
+                            {
+                                q.push({x-1,y});
+                                grid[x-1][y] = '0';
+                            }
+                        }
+                        
+                        if(y < grid[x].size()-1)
+                        {
+                            if(grid[x][y+1] == '1')
+                            {
+                                q.push({x,y+1});
+                                grid[x][y+1] = '0';
+                            }
+                                
+                        }
+                        
+                        if(y > 0)
+                        {
+                            if(grid[x][y-1] == '1')
+                            {
+                                q.push({x,y-1});
+                                grid[x][y-1] = '0';
+                            }
+                                
+                        }
+                        
+                        grid[x][y] = '0';
+                        
+                        q.pop();
+                    }
+                }
+            }
+        }
+        
+        
+        return islands;
     }
 };
