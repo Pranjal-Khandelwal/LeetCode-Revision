@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        transpose(matrix);
+        reverse_col(matrix);
+    }
+    
+    void transpose(vector<vector<int>>& matrix)
+    {
+        int n=matrix.size();
+        
+        for(int row=0;row<n;row++)
+        {
+            for(int col=row;col<n;col++)
+            {
+                swap(matrix[row][col],matrix[col][row]);
+            }
+        }
+    }
+    
+    void reverse_col(vector<vector<int>>& matrix)
+    {
+    int n=matrix.size();
+        
+        for(int row=0;row<n;row++)
+        {
+            for(int col=0;col<n/2;col++)
+            {
+                swap(matrix[row][col],matrix[row][n-col-1]);
+            }
+        }
+    }
+};
