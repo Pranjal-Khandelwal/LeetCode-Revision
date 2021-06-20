@@ -25,3 +25,47 @@ public:
         return {first,last};
     }
 };
+
+Approach-2(Binary Search)
+T.C-O(logn)
+S.C-O(1)
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int low=0,high=nums.size();
+        
+        int mid,left,right;
+        
+        while(low<high)
+        {
+            mid=low+(high-low)/2;
+            
+            if(nums[mid]>=target)
+                high=mid;
+            else
+                low=mid+1;
+    }
+        left=low;
+        
+        low=0,high=nums.size();
+        
+        while(low<high)
+        {
+            mid=low+(high-low)/2;
+            
+            if(nums[mid]>target)
+                high=mid;
+            else
+                low=mid+1;
+        }
+        right=low;
+        
+        if(left==right)
+            return vector<int>{-1,-1};
+        else
+            return vector<int>{left,right-1};
+        
+     
+        }
+};
