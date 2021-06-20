@@ -1,4 +1,7 @@
 Approach-1(Spiral Matrix)
+T.C-O(N)
+S.C-O(1)
+
 class Solution {
 public:
     
