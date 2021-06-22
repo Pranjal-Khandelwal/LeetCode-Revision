@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int res=0;
+    void preorder(TreeNode* root,int max){
+        
+        if(!root)
+            return;
+        if(root->val>=max){
+            res++;
+            max=root->val;
+        }
+            
+        preorder(root->left,max);
+        preorder(root->right,max);
+    }
+    int goodNodes(TreeNode* root) {
+        preorder(root,INT_MIN);
+        return res;
+    }
+};
