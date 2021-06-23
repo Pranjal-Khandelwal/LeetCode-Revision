@@ -1,0 +1,72 @@
+Approach-1(Brute Force Approach)
+T.C-O(N^3)
+S.C-O(1)
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n=nums.size();
+        
+        
+        vector<vector<int>>res;
+        
+        for(int i=0;i<n-2;i++)
+        {
+            for(int j=i+1;j<n-1;j++)
+            {
+                for(int k=j+1;k<n;k++)
+                {
+                    if(nums[i]+nums[j]+nums[k]==0)
+                      res.push_back(vector<int> {nums[i], nums[j], nums[k]});
+                    break;
+                }  
+            }
+        }
+        return res;
+            
+    }
+};                    
+Approach-2(Sorting and 2-Pointer)
+T.C.-O(N^2)+O(NLOGN)
+S.C-O(1)
+
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n=nums.size();
+    if(n<=2) return {};
+        
+    vector<vector<int> > res;
+    sort(nums.begin(), nums.end());
+    
+    for(int i =0; i <n;){
+        int start = i+1, end = n-1;
+
+        while(start < end){
+            if(nums[i]+nums[start]+nums[end] == 0){
+                res.push_back({nums[i],nums[start],nums[end]});
+                start++;
+                end--;
+                while((start < end) && nums[start] == nums[start-1]) start++;
+                while((start < end) && nums[end] == nums[end+1]) end--;
+
+            }else if(nums[i]+nums[start]+nums[end]<0){
+                start++;
+                while((start < end) && nums[start] == nums[start-1]) start++;
+            }else{
+                end--;
+                while((start < end) && nums[end] == nums[end+1]) end--;
+            }
+        }
+        
+        i++;
+        while((i < nums.size()) && nums[i] == nums[i-1])
+            i++;
+        
+    }
+    return res;
+}
+    
+
+};                             
