@@ -1,4 +1,6 @@
 Approach-1(Brute Force Approach)
+T.C-O(N^2)
+S.C-O(N)
 
 class Solution {
 public:
@@ -17,5 +19,31 @@ public:
             }
         }
         return res;
+    }
+};
+
+Approach-2(Prefix sum)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n=nums.size();
+        
+        vector<int>lhs(n,1);
+        int rhs=1;
+        
+        for(int i=1;i<n;i++)
+        {
+            lhs[i]=lhs[i-1]*nums[i-1];
+        }
+        
+        for(int i=n-1;i>=1;i--)
+        {
+            rhs*=nums[i];
+            lhs[i-1]*=rhs;
+        }
+        return lhs;
     }
 };
