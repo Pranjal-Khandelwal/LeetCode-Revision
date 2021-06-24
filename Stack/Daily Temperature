@@ -1,0 +1,29 @@
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int n=temperatures.size();
+        vector<int>res(n,0);
+        
+        for(int i=0;i<n;i++)
+        {
+            int flag=0,count=0;
+            for(int j=i+1;j<n;j++)
+            {
+                count++;
+                if(temperatures[j]>temperatures[i]){
+                    flag=1;
+                break;
+                }
+                
+            }
+            if(flag==0)
+                res[i]=0;
+            else
+                res[i]=count;
+             
+            }
+        return res;
+    }
