@@ -1,0 +1,51 @@
+Approach-1(Brute Force)
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        
+        int temp,prev;
+        
+        for(int i=0;i<k;i++)
+        {
+            prev=nums[n-1];
+            
+            for(int j=0;j<n;j++)
+            {
+                temp=nums[j];
+                nums[j]=prev;
+                prev=temp;
+            }
+        }
+        
+    }
+};
+
+Approach-2(Using Reverse)
+lass Solution {
+public:
+    void reverse(vector<int>& nums,int start,int end)
+    {
+        while(start<end)
+        {
+            int temp=nums[start];
+            nums[start]=nums[end];
+            nums[end]=temp;
+            start++;
+            end--;
+        }
+    }
+    
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        
+        k=k%n;
+        reverse(nums,0,n-1);
+        reverse(nums,0,k-1);
+        reverse(nums,k,n-1);
+    }
+};
