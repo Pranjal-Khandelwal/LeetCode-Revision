@@ -26,7 +26,10 @@ public:
 };
 
 Approach-2(Using Reverse)
-lass Solution {
+T.C-O(N)
+S.C-O(1)
+
+class Solution {
 public:
     void reverse(vector<int>& nums,int start,int end)
     {
