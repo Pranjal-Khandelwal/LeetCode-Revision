@@ -1,0 +1,67 @@
+Approach-1(Recursion)
+T.C-O(2^N)
+S.C-O(1)
+
+class Solution {
+public:
+    int helper(int i,string& s)
+    {
+        int n=s.size();
+        
+        if(i==n)
+            return 1;
+        
+        if(s[i]=='0')
+            return 0;
+        
+        int res=helper(i+1,s);
+        
+        if(i<n-1 && (s[i]=='1' || (s[i]=='2' && s[i+1]< '7')))
+            res+=helper(i+2,s);
+        
+        return res;
+        
+    }
+    int numDecodings(string s) {
+        
+        if(s.empty())
+            return 0;
+        else
+            return helper(0,s);
+    }
+};
+
+Approach-2(Recursion+memoization)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    int helper(int i,string& s,vector<int>& dp)
+    {
+        int n=s.size();
+        
+        if(dp[i]!=-1)
+            return dp[i];
+        
+        if(s[i]=='0')
+            return dp[i]=0;
+        
+        int res=helper(i+1,s,dp);
+        
+        if(i<n-1 && (s[i]=='1' || (s[i]=='2' && s[i+1]< '7')))
+            res+=helper(i+2,s,dp);
+        
+        return dp[i]=res;
+        
+    }
+    int numDecodings(string s) {
+        int n=s.size();
+        vector<int>dp(n+1,-1);
+        dp[n]=1;
+        if(s.empty())
+            return 0;
+        else
+            return helper(0,s,dp);
+    }
+};
