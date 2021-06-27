@@ -1,5 +1,8 @@
 Approach-1(Recursion)
-T.C-O(
+T.C-O(m*n*3^n)
+s.c-o(1)
+
+
 class Solution {
 public:
     int helper(int i,int j,vector<vector<char>>& matrix)
@@ -32,3 +35,49 @@ public:
         return s*s;
     }
 };
+ 
+ Approach-2(Recursion+Memoization)
+ 
+ T.C-O(M*N)
+ S.C-O(M*N)
+ 
+ 
+class Solution {
+public:
+    int helper(int i,int j,vector<vector<char>>& matrix,vector<vector<int>>& dp)
+    {
+        if(i==0 || j==0)
+            return matrix[i][j]-'0';
+        
+        if(matrix[i][j]=='0')
+            return 0;
+        
+        if(dp[i][j]!=NULL)
+            return dp[i][j];
+            
+        
+        return dp[i][j]= min(helper(i-1,j-1,matrix,dp),min(helper(i-1,j,matrix,dp),helper(i,j-1,matrix,dp)))+1;
+        
+    }
+    int maximalSquare(vector<vector<char>>& matrix) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        
+        vector<vector<int>>dp(row,vector<int>(col));
+        
+        if(row==0)
+            return 0;
+        
+        int s=0;
+        
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++ )
+            {
+               s=max(s,helper(i,j,matrix,dp));
+            }
+        }
+        return s*s;
+    }
+};
+
