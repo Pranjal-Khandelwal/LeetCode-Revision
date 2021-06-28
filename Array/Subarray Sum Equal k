@@ -10,7 +10,7 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            for(int j=i+1;j<=n;j++)
+            for(int j=i;j<n;j++)
             {
                  int sum=0;
                 for(int k=i;k<j;k++)
@@ -20,6 +20,58 @@ public:
                     count++;
             }
         }
+        return count;
+    }
+};
+Approach-2(using two loop)
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+        int count=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            int sum=0;
+            for(int j=i;j<n;j++)
+            {
+                    sum+=nums[j];
+                
+                if(sum==k)
+                    count++;
+            }
+        }
+        return count;
+    }
+};
+
+Approach-3(using Hashmap)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+        unordered_map<int,int>mp;
+        int sum=0,count=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+            
+            if(sum==k)
+                count++;
+            
+            if(mp.find(sum-k)!=mp.end())
+                count+=mp[sum-k];
+            
+            mp[sum]++;
+                
+        }
+    
         return count;
     }
 };
