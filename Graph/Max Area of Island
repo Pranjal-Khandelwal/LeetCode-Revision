@@ -1,3 +1,8 @@
+APPROACH-DFS
+
+T.C-O(N^2)
+S.C-O(1)
+
 class Solution {
 public:
     void dfs(vector<vector<int>>& grid,int i,int j,int &current)
@@ -13,10 +18,9 @@ public:
         dfs(grid,i+1,j,current);
          dfs(grid,i-1,j,current);
          dfs(grid,i,j+1,current);
-         dfs(grid,i,j-1,current);
-        
-        
+         dfs(grid,i,j-1,current);    
     }
+    
     int maxAreaOfIsland(vector<vector<int>>& grid) {
         int m=grid.size();
         int n=grid[0].size();
