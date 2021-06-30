@@ -1,0 +1,26 @@
+Approach-1(Using Hashmap)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int>mp;
+        vector<int>res;
+        int n=nums.size(),i;
+        for(i=0;i<n;i++)
+        {
+            int x=target-nums[i];
+            
+            if(mp.find(x)!=mp.end())
+            {
+                res.push_back(mp[x]);
+                res.push_back(i);
+            }
+            else{
+            mp[nums[i]]=i;
+        }
+        }
+            return res;
+    }
+};
