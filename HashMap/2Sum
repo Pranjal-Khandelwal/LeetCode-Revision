@@ -1,6 +1,6 @@
 Approach-1(Brute Force)
 T.C-O(N^2)
-S.C-O(N)
+S.C-O(1)
 
 class Solution {
 public:
