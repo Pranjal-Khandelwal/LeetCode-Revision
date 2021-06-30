@@ -1,7 +1,8 @@
-APPROACH-DFS
+APPROACH-1(USING DFS)
 
-T.C-O(N^2)
-S.C-O(1)
+T.C-O(M*N)
+S.C-O(M*N)
+
 
 class Solution {
 public:
