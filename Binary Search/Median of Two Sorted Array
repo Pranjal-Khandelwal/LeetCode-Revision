@@ -1,0 +1,47 @@
+Approach-1(Brute Force)
+T.C-O(N^2)
+S.C-O(N)
+
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int n1=nums1.size();
+        int n2=nums2.size();
+        
+        if(n1==0 && n2==0)
+            return 0;
+        
+      vector<int> nums3;
+        
+          int i=0,j=0;
+    while(i<n1 || j<n2){
+        
+     if(i<n1 && j<n2){
+         
+       if(nums1[i]<nums2[j]){
+      nums3.push_back(nums1[i]);
+             i++;
+             }
+         
+          else{
+    nums3.push_back(nums2[j]);
+            j++;
+        }
+    }
+    if(i<n1 && j>=n2){
+         nums3.push_back(nums1[i]);
+                i++;
+            }
+    if(i>=n1 && j<n2){
+         nums3.push_back(nums2[j]);
+                 j++;
+       }
+  }
+        
+        
+        if(nums3.size()%2==0)
+            return (double)(nums3[(nums3.size()-1)/2]+nums3[nums3.size()/2])/2;
+        else
+            return (double)(nums3[nums3.size()/2]);
+    }
+};
