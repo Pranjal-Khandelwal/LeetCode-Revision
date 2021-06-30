@@ -1,0 +1,55 @@
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    int calculate(string s) {
+        int n=s.size();
+        
+        int res=0;
+        int sign=1;
+        int i=0;
+        
+         stack<int>st;
+        
+        while(i<n)
+        {
+            if(s[i]=='+')
+            {
+                sign=1;  // for positive we make as 1 
+            }
+            else if(s[i]=='-')
+            {
+                sign=-1;   // for negative we make as -1
+            }
+            else if(isdigit(s[i]))  // if it is a digit
+            {
+                int number= s[i]-'0';
+                while(i+1<n && isdigit(s[i+1])){
+                    number=number*10+(s[i+1]-'0');
+                    i++;
+                }
+            res+=number*sign;
+            }
+            
+            else if(s[i]=='('){
+                st.push(res);
+                st.push(sign);
+                res=0;
+                sign=1;
+            }
+            else if(s[i]==')')
+            {
+                int sign1=st.top();
+                 st.pop();
+                int res1=st.top();
+                 st.pop();
+                
+                res=res*sign1+res1;
+            }
+            i++;
+        }
+        return res;
+        
+    }
+};
