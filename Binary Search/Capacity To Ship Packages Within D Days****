@@ -1,3 +1,5 @@
+Approach-1(Brute Force)
+
 T.C-O(N*totalweight)
 S.C-O(1)
 
@@ -46,5 +48,66 @@ public:
         }
         
         return minShipCapacity;
+    }
+};
+
+APPROACH-2(BINARY SEARCH)
+T.C-O(N*LOGN)
+S.C-O(1)
+
+class Solution {
+public:
+    bool ableToShipPackage(vector<int>& weights,int d,int shipCapacity)
+    {
+        int totalweight=0;
+        int days=1;
+        
+        for(int i=0;i<weights.size();i++)
+        {
+            if(weights[i]>shipCapacity)
+                return false;
+            
+            totalweight+=weights[i];
+            
+            if(totalweight>shipCapacity){
+                days++;
+            
+            totalweight=weights[i];
+        }
+        }
+        
+        if(days>d)
+            return false;
+        
+        return true;
+        
+        
+    }
+    
+    int shipWithinDays(vector<int>& weights, int D) {
+        int res=0;
+        
+       int low=0;
+       int high=0;
+        
+        for(int i=0;i<weights.size();i++)
+        {
+            high+=weights[i];
+        }
+        
+        
+        while(low<=high)
+        {
+             int mid=low+(high-low)/2;
+            
+            if(ableToShipPackage(weights,D,mid))
+            {
+                res=mid;
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return res;
     }
 };
