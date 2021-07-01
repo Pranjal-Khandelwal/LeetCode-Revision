@@ -1,0 +1,50 @@
+T.C-O(N*totalweight)
+S.C-O(1)
+
+class Solution {
+public:
+    bool ableToShipPackage(vector<int>& weights,int d,int shipCapacity)
+    {
+        int CurrentWeight=0;
+        int days=1;
+        
+        for(int i=0;i<weights.size();i++)
+        {
+            CurrentWeight+=weights[i];
+            
+            if(CurrentWeight>shipCapacity)
+            {
+                days++;
+                
+                if(days>d){
+                    return false;
+                }
+                CurrentWeight=weights[i];
+            }
+            
+        }
+        
+        return true;  
+    }
+    
+    int shipWithinDays(vector<int>& weights, int D) {
+        int totalweight=0;
+        int maxweight=0;
+        
+        for(int i=0;i<weights.size();i++)
+        {
+            totalweight+=weights[i];
+            
+            maxweight=max(maxweight,weights[i]);
+        }
+        
+        int minShipCapacity=max(maxweight,(int)ceil((double)totalweight/D));
+        
+        while(!ableToShipPackage(weights,D,minShipCapacity))
+        {
+            minShipCapacity++;
+        }
+        
+        return minShipCapacity;
+    }
+};
