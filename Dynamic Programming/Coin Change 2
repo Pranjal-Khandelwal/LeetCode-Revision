@@ -1,0 +1,27 @@
+T.C-O(2^N)
+S.C-O(1)
+
+class Solution {
+public:
+    int coinChange(int amount,vector<int>& coins,int i)
+    {
+        if(amount==0)
+            return 1;
+        if(amount<0 || i==coins.size())
+            return 0;
+        
+        if(amount<coins[i])
+            return coinChange(amount,coins,i+1);
+        
+        return coinChange(amount,coins,i+1)+coinChange(amount-coins[i],coins,i);
+    }
+    int change(int amount, vector<int>& coins) {
+        if(amount==0)
+            return 1;
+        if(coins.size()==0)
+            return 0;
+        
+        return coinChange(amount,coins,0);
+        
+    }
+};
