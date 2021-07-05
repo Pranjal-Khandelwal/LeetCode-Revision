@@ -20,6 +20,9 @@ public:
 
 Approach-2(using priority queue)
 
+T.C-O(N)
+S.C-O(1)
+
 class Solution {
 public:
     vector<int> sortArray(vector<int>& nums) {
