@@ -14,7 +14,7 @@ public:
 
 Approach-2(Using MinHeap)
 T.C-O(NLOGK)
-S.C-O(N^2)
+S.C-O(1)
 
 class Compare {
 public:
