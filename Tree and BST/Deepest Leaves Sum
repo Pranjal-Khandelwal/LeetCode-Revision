@@ -1,0 +1,35 @@
+Approach-1
+T.C-O(N)
+s.c-O(N)
+
+class Solution {
+public:
+    int max_depth;
+    int sumhelper(TreeNode* root,int depth)
+    {
+        if(!root)
+            return 0;
+        
+        if(depth==max_depth-1)
+            return root->val;
+        
+        return sumhelper(root->left,depth+1)+sumhelper(root->right,depth+1);     
+    }
+    
+    int depthhelper(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        return max(1+depthhelper(root->left),1+depthhelper(root->right));
+        
+    }
+    int deepestLeavesSum(TreeNode* root) {
+        if(!root)
+            return 0;
+        
+        max_depth=depthhelper(root);
+        
+        return sumhelper(root,0);
+        
+    }
+};
