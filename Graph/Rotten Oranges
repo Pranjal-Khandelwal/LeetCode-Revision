@@ -1,0 +1,58 @@
+T.C-O(N*M)
+S.C-O(N*M)
+
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int m=grid.size();
+        int n=grid[0].size();
+        
+        int count=0,res=-1;
+        
+        queue<pair<int,int>>q;
+        
+       vector<vector<int>> direction{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(grid[i][j]==2){
+                    q.push({i,j});
+                }
+                if(grid[i][j]>0)
+                {
+                    count++;
+                }
+            }
+        }
+        
+        while(!q.empty())
+        {
+            res++;
+            int size=q.size();
+            
+          for(int k=0;k<size;k++)
+          {
+              pair<int,int>current=q.front();
+               count--;
+              q.pop();
+              
+                for(int i=0;i<4;i++)
+                {
+                    int x=current.first+direction[i][0];
+                    int y=current.second+direction[i][1];
+                    
+                    if(x<0 || x>=m || y<0 || y>=n || grid[x][y]!=1)
+                        continue;
+                    
+                     grid[x][y]=2;
+                        q.push({x,y});
+                    }
+                }
+            }
+        if(count==0)
+            return max(0,res);
+       
+        return -1;
+    }
