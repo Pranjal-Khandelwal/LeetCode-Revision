@@ -23,3 +23,50 @@ public:
         return res;
     }
 };
+
+Approach-2(Using Sorting)
+T.C-O(NLOGN)
+S.C-O(1)
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>res;
+        if(n==0)
+            return nums;
+        sort(nums.begin(),nums.end());
+        
+        for(int i=0;i<n-1;i++)
+        {
+            if(nums[i]==nums[i+1])
+                res.push_back(nums[i]);
+        }
+        return res;
+    }
+};
+
+Approach-3(using Unordered_map)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>res;
+        unordered_map<int,int>mp;
+        
+        for(int i=0;i<n;i++)
+        {
+            mp[nums[i]]++;
+        }
+        
+        for(auto x:mp)
+        {
+            if(x.second>1)
+                res.push_back(x.first);
+        }
+        return res;
+    }
+};
