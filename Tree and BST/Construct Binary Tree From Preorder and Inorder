@@ -1,0 +1,29 @@
+class Solution {
+public:
+    TreeNode* BuildTreeUtil(vector<int>& preorder,vector<int>& inorder,int& index,int left,int right)
+    {
+        
+        if(left>right)
+            return NULL;
+        
+        int pivot=left;
+        
+        while(preorder[index]!=inorder[pivot])
+            pivot++;
+        
+        index++;
+        
+        TreeNode* temp=new TreeNode(inorder[pivot]);
+        
+        temp->left=BuildTreeUtil(preorder,inorder,index,left,pivot-1);
+        temp->right=BuildTreeUtil(preorder,inorder,index,pivot+1,right);
+        
+        return temp;
+        
+        
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int index=0;
+        return BuildTreeUtil(preorder,inorder,index,0,inorder.size()-1);
+    }
+};
