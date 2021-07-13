@@ -1,0 +1,44 @@
+T.C-O(N)
+S.C-O(1)
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        
+        while(fast!=NULL && fast->next!=NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        if(fast!=NULL){   // so fast pointer is not at the end of Linked we iterate the slow pointer 
+            slow=slow->next;
+        }
+        slow=reverse(slow);  
+        fast=head;
+        
+        while(slow!=NULL)
+        {
+            if(slow->val!=fast->val){
+                return false;
+            }
+            slow=slow->next;
+            fast=fast->next;
+        }
+        return true;
+    }
+    
+    ListNode* reverse(ListNode* head) {
+        ListNode *nextNode,*prevNode=NULL;
+        
+        while(head)
+        {
+            nextNode=head->next;
+            head->next=prevNode;
+            prevNode=head;
+            head=nextNode;
+}
+        return prevNode;
+    }
+};
