@@ -1,0 +1,22 @@
+APPROACH-1(Brute Force)
+
+TC.-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    int reversePairs(vector<int>& nums) {
+        int n=nums.size();
+        int count=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(nums[i]/2.0>nums[j])
+                    count++;
+            }
+        }
+        return count;
+    }
+};
