@@ -18,3 +18,35 @@ public:
         return v[n-1];
     }
 };
+
+
+Approach-3(Dynamic Programming)
+T.C-O(N)
+S.C-O(1)
+
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        vector<int>v(n);
+        
+        if(n==1)
+            return 1;
+        
+        v[0]=1;
+        
+        long x2=0,x3=0,x5=0;
+        
+        for(long i=1;i<n;i++)
+        {
+            v[i]=min(2*v[x2],min(3*v[x3],5*v[x5]));
+            
+            if(v[i]==2*v[x2])
+                x2++;
+           if(v[i]==3*v[x3])
+               x3++;
+            if(v[i]==5*v[x5])
+                x5++;
+        }
+        return v[n-1];
+    }
+};
