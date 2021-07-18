@@ -1,0 +1,64 @@
+Approach-1(Recursion)
+T.C-O(N*2^MIN(N,K))
+S.C.-O(1)
+
+class Solution {
+public:
+    int EggDrop(int k,int n)
+    {
+        if(n==0 || n==1)
+            return n;
+        
+        if(k==1)
+            return n;
+        
+        int res=INT_MAX;
+        
+        for(int i=1;i<=n;i++)
+        {
+            int temp=1+max(EggDrop(k-1,i-1),EggDrop(k,n-i));
+            
+            res=min(res,temp);
+        }
+        return res;
+    }
+    int superEggDrop(int k, int n) {
+        return EggDrop(k,n);
+    }
+};
+
+Approach-2(Recursion+Memoization)
+T.C.-O(N^2*K)
+S.C-O(N*K)
+
+class Solution {
+public:
+    
+    int EggDrop(int k,int n,vector<vector<int>>& dp)
+    {
+        if(n==0 || n==1)
+            return n;
+        
+        if(k==1)
+            return n;
+        
+        if(dp[k][n]!=-1)
+            return dp[k][n];
+        
+        int res=INT_MAX;
+        
+        for(int i=1;i<=n;i++)
+        {
+            int temp=1+max(EggDrop(k-1,i-1,dp),EggDrop(k,n-i,dp));
+            
+            res=min(res,temp);
+        }
+        return dp[k][n]=res;
+    }
+    int superEggDrop(int k, int n) {
+         vector<vector<int>> dp(k+1,vector<int> (n+1,-1));
+        return EggDrop(k,n,dp);
+    }
+};
+
+Approach-3(Meemoization+Binary Search)
