@@ -1,0 +1,23 @@
+Approach-1(Recursion)
+
+class Solution {
+public:
+    int LIS(vector<int>& nums,int currentIndex,int previousIndex)
+    {
+        if(currentIndex==nums.size())
+            return 0;
+        
+        int res=0;
+        
+        if(previousIndex==-1 || nums[previousIndex]<nums[currentIndex])
+           res=1+LIS(nums,currentIndex+1,currentIndex);
+        
+        res=max(res,LIS(nums,currentIndex+1,previousIndex));
+        
+        return res;
+            
+    }
+    int lengthOfLIS(vector<int>& nums) {
+        return LIS(nums,0,-1);
+    }
+};
