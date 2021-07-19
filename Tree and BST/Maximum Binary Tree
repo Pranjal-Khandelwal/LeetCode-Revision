@@ -1,0 +1,30 @@
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    TreeNode* maxBinaryTree(vector<int>& nums,int left,int right)
+    {
+        if(left>right)
+            return NULL;
+        int maximum_index=left;
+        
+        for(int i=left;i<=right;i++)
+        {
+        if(nums[i]>nums[maximum_index])
+            maximum_index=i;
+        }
+        
+        TreeNode* root=new TreeNode(nums[maximum_index]);
+        
+        root->left=maxBinaryTree(nums,left,maximum_index-1);
+        root->right=maxBinaryTree(nums,maximum_index+1,right);
+        
+        return root;
+        
+    }
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        int n=nums.size();
+        return maxBinaryTree(nums,0,n-1);
+    }
+};
