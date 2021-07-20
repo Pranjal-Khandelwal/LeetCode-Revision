@@ -1,0 +1,34 @@
+Approach-1(Using Slow and Fast Pointer)
+
+BUT it is giving TLE SO WE CAN USE AS A First Approach it is not optimized
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL || head->next==NULL||k==0)
+            return head;
+        
+        ListNode* fast=head;
+        ListNode* slow=head;
+        
+        ListNode* tmp;
+        
+        for(int i=0;i<k;i++)
+        {
+            if(fast->next!=NULL)
+                fast=fast->next;
+            else
+                fast=head;
+        }
+        
+        while(fast->next!=NULL){
+            fast=fast->next;
+            slow=slow->next;
+        }
+        fast->next=head;
+        tmp=slow->next;
+        slow->next=NULL;
+        
+        return tmp;
+    }
+};
