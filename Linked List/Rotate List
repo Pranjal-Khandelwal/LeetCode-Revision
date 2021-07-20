@@ -32,3 +32,39 @@ public:
         return tmp;
     }
 };
+
+Approach-2(Counting The Number of Nodes)
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(k==0 || !head)
+            return head;
+        
+        int length=1;
+        
+        ListNode* tail=head;
+        ListNode* temp=head;
+        
+        while(tail->next!=NULL){
+            tail=tail->next;
+        length++;
+        }
+        
+        tail->next=head;            
+        
+        if(k%=length)
+        {
+            for(auto i=0;i<length-k;i++)
+                tail=tail->next;
+        }
+        
+        temp=tail->next;
+        tail->next=NULL;
+        
+        return temp;
+        
+            
+        
+    }
+};
