@@ -1,0 +1,26 @@
+Approach-1(Using Unordered_map)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    vector<string> findRepeatedDnaSequences(string s) {
+       unordered_map<string,int>mp;
+        vector<string>v;
+        
+        if(s.size()<=9)
+            return v;
+        
+        for(int i=0;i<s.size()-9;i++)
+        {
+            mp[s.substr(i,10)]++;
+        }
+        
+        for(auto x:mp)
+        {
+            if(x.second>1)
+                v.push_back(x.first);
+        }
+        return v;
+    }
+};
