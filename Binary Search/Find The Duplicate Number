@@ -1,0 +1,58 @@
+Approach-1(Brute Force)
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int ans;
+        int n=nums.size();
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(nums[i]==nums[j])
+                    ans=nums[i];
+            }
+        }
+        return ans;
+    }
+};
+
+
+Approach-2(Using Sorting)
+
+T.C-O(NLOGN)
+S.C-O(1)
+
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        
+        int res=nums[0];
+        
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i-1]==nums[i])
+                res=nums[i];
+                
+        }
+        return res;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
