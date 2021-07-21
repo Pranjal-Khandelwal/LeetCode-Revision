@@ -41,20 +41,21 @@ S.C-O(1)
 
 class Solution {
 public:
-    int findPeakElement(vector<int>& nums) {
-      int low=0;
-      int high=nums.size()-1;
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int index=-1;
+        int n=arr.size();
         
-        while(low<high)
+        int low=0,high=n-1;
+        
+        while(low<=high)
         {
             int mid=low+(high-low)/2;
             
-            if(nums[mid]>nums[mid+1])
-                high=mid;
+            if(arr[mid]>arr[mid+1])
+                high=mid-1;
             else
                 low=mid+1;
         }
         return low;
     }
 };
-
