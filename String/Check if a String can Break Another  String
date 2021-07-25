@@ -29,3 +29,40 @@ public:
         
     }
 };
+
+Approach-2(using Hashmap)
+T.C-O(N)
+S.C-O(N)
+
+
+class Solution {
+public:
+    bool checkIfCanBreak(string s1, string s2) {
+        int n=s1.size();
+        
+        vector<int>v(26,0);
+        
+        for(int i=0;i<n;i++)
+        {
+            v[s1[i]-'a']++;
+            v[s2[i]-'a']--;
+        }
+        
+        int res=0;
+        bool x1=true,x2=true;
+        
+        for(int x:v)
+        {
+            res+=x;
+            
+            if(res<0)
+                x1=false;
+            if(res>0)
+                x2=false;
+            
+            if(!x1 && !x2)
+                return false;
+        }
+          return true;
+    }
+};
