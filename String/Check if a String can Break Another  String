@@ -1,0 +1,31 @@
+Approach-1(Using Sorting)
+
+T.C-O(NLOGN)
+S.C-O(1)
+
+class Solution {
+public:
+    bool checkIfCanBreak(string s1, string s2) {
+
+        sort(s1.begin(),s1.end());
+        sort(s2.begin(),s2.end());
+        
+        bool x1=true,x2=true;
+        
+          int n=s1.size();
+        
+        
+        
+        for(int i=0;i<n;i++)
+        {
+            if(s1[i]<s2[i]) x1=false;
+            if(s2[i]<s1[i])
+                x2=false; 
+        }
+         if(x1 || x2)
+                return true;
+        
+        return false;
+        
+    }
+};
