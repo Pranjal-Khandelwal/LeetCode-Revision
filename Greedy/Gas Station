@@ -1,0 +1,27 @@
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int n=gas.size();
+        int i,j;
+        
+        for(int i=0;i<n;i+=j)
+        {
+            int gas_remain=0;
+            for(int j=1;j<=n;j++)
+            {
+                int k=(i+j-1)%n;
+                
+                gas_remain+=gas[k]-cost[k];
+                
+                if(gas_remain<0)
+                    break;
+            }
+                if(j>n)
+                    return i;
+            }
+        return -1;
+    }
+};
