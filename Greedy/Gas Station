@@ -25,3 +25,34 @@ public:
         return -1;
     }
 };
+
+Approach-1(Optimizes Solution)
+T.C-O(N)
+S.C-O(1)
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int n=gas.size();
+        int gas_remain=0;
+        int total_gas_remain=0;
+        int total=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            total_gas_remain+=gas[i]-cost[i];
+            gas_remain+=gas[i]-cost[i];
+            
+            if(gas_remain<0)
+            {
+                gas_remain=0;
+                total=i+1;
+            }
+        }
+        if(total_gas_remain<0)
+            return -1;
+        else
+            return  total;
+        
+    }
+};
