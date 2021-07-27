@@ -1,0 +1,18 @@
+T.C-O(N)
+S.C-O(1)
+
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==NULL || head->next==NULL)
+            return head;
+        
+        ListNode* second=head->next;
+        ListNode* third=second->next;
+        
+        second->next=head;
+        head->next=swapPairs(third);
+        
+        return second;         
+    }
+};
