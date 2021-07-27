@@ -1,0 +1,25 @@
+Approach-2(Using Hashmap)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>res;
+        unordered_map<int,int>mp;
+        
+        for(auto x:nums)
+        {
+            mp[x]++;
+        }
+        
+        for(auto y:mp)
+        {
+           if(y.second>n/3) 
+               res.push_back(y.first);
+               
+        }
+        return res;
+    }
+};
