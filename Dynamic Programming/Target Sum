@@ -1,0 +1,21 @@
+T.C-O(2^N)
+S.C-O(1)
+
+class Solution {
+public:
+    int targetSum(int i,vector<int>& nums,int target)
+    {
+        int n=nums.size();
+        
+        if(target==0 && i==n)
+            return 1;
+        
+        if(i==n)
+            return 0;
+        
+        return targetSum(i+1,nums,target+nums[i])+targetSum(i+1,nums,target-nums[i]);
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+        return targetSum(0,nums,target);
+    }
+};
