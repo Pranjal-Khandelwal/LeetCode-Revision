@@ -1,0 +1,33 @@
+T.C-O(N^3LOGN)
+S.C-O(1)
+
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int n=nums.size();
+        int maximum=INT_MAX;
+        
+        sort(nums.begin(),nums.end());
+        
+        int res=0,sum=0;
+        
+        for(int i=0; i<n-2; i++)
+        {
+            for(int j=i+1; j<n-1; j++)
+            {
+                for(int k=j+1; k<n; k++)
+                {
+                    sum=nums[i]+nums[j]+nums[k];
+                    
+                        if(maximum>abs(sum-target))
+                        {
+
+                        maximum=abs(sum-target);
+                        res=nums[i]+nums[j]+nums[k];
+                    }
+                }
+            }
+    }
+    return res;
+}
+};
