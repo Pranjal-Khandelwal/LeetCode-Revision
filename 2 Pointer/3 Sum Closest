@@ -1,5 +1,4 @@
-T.C-O(N^3LOGN)
-S.C-O(1)
+Approach-1(Brute Force)
 
 class Solution {
 public:
@@ -30,4 +29,95 @@ public:
     }
     return res;
 }
+};
+
+
+Approach-2(USING 2-pointer and sort)
+T.C-O(N^2)
+S.C-depend upon the sorting algorithm
+
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int n=nums.size();
+        int maximum=INT_MAX;
+        int sum=0;
+        
+        
+        
+        sort(nums.begin(),nums.end());
+        int res=nums[0]+nums[1]+nums[2];
+        
+        for(int i=0;i<n;i++){
+           int low=i+1,high=n-1;
+        
+        while(low<high)
+        {
+            sum=nums[i]+nums[low]+nums[high];
+            
+            if(abs(sum-target)<abs(res-target))
+                res=sum;
+                
+                
+            if(sum>target)
+                high--;
+            else
+                low++;
+                
+        } 
+    
+        }
+        return res;
+        
+    }
+};
+
+Approach-3(Binary Search)
+T.C-O(N^2LOGN)
+S.C-O(nlogn)
+
+
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int n=nums.size();
+        
+        sort(nums.begin(), nums.end());
+        
+        int res=0;
+        int maximum=INT_MAX;
+        for(int i=0; i<n-2; i++){
+            
+            for(int j=i+1; j<nums.size()-1; j++){
+                int sum=nums[i]+nums[j];
+                
+                 int low=j+1, high=nums.size()-1;
+               
+                while(low<=high){
+                    
+                    int mid=low+(high-low)/2;
+                    
+                    int total=sum+nums[mid];
+                    
+                    if(total<target){
+                        low=mid+1;
+                        
+                        if(maximum>abs(total-target)){
+                            maximum=abs(total-target);
+                            res=total;
+                        }
+                    }
+                    else{
+                        high=mid-1;
+                        if(maximum>abs(total-target)){
+                            maximum=abs(total-target);
+                            res=total;
+                        }
+                    }
+                }
+                
+            }
+        }
+        return res;
+    }
 };
