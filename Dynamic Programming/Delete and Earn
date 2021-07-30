@@ -1,0 +1,30 @@
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+        int n=10001;
+        vector<int>res(n,0);
+        
+        int maximum;
+        
+        for (int num : nums)
+            res[num] += num;
+        
+        int take1=0,skip1=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            int take2=skip1+res[i];
+            int skip2=max(take1,skip1);
+            take1=take2;
+            skip1=skip2;
+        }
+        
+        return max(skip1,take1);
+        
+        
+    }
+};
+
