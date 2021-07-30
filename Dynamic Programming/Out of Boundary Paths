@@ -1,0 +1,59 @@
+Approach-1(Recursion)
+T.C-O(4^N)
+S.C-O(N)
+
+class Solution {
+public:
+    
+    int outBoundaryPaths(int m,int n,int k,int i,int j)
+    {
+        
+        if(i==m || i<0 || j==n || j<0)
+            return 1;
+        
+        if(k==0)
+            return 0;
+        
+        return (outBoundaryPaths(m,n,k-1,i-1,j)+
+             outBoundaryPaths(m,n,k-1,i+1,j)+
+            outBoundaryPaths(m,n,k-1,i,j-1)+
+            outBoundaryPaths(m,n,k-1,i,j+1))%1000000007;
+    }
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        return outBoundaryPaths(m,n,maxMove,startRow,startColumn);
+                
+    }
+};
+
+
+Approach-2(Recursion+Memoization)
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    
+   long long int dp[50][50][51];
+    long long int outBoundaryPaths(int m,int n,int k,int i,int j)
+    {
+        
+        if(i==m || i<0 || j==n || j<0)
+            return 1;
+        
+        if(k==0)
+            return 0;
+        
+        if(dp[i][j][k]!=-1)
+            return dp[i][j][k];
+        
+      
+        return dp[i][j][k]= (outBoundaryPaths(m,n,k-1,i-1,j)+
+             outBoundaryPaths(m,n,k-1,i+1,j)+
+            outBoundaryPaths(m,n,k-1,i,j-1)+
+            outBoundaryPaths(m,n,k-1,i,j+1))%1000000007;
+    }
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        memset(dp,-1,sizeof(dp));
+        return outBoundaryPaths(m,n,maxMove,startRow,startColumn);
+    }
+};
