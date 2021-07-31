@@ -1,0 +1,44 @@
+Approach-1(Using Sliding Window)
+
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int n=nums.size();
+        
+        vector<int>left(n);
+        vector<int>right(n);
+        
+        left[0]=0;
+        
+        for(int i=1;i<n;i++)    // for the left part of that particular element
+        {
+            if(nums[i-1]==1)
+                left[i]=left[i-1]+1;
+            else
+                left[i]=0;
+            
+        }
+        
+        right[n-1]=0;
+        
+            for(int i=n-2;i>=0;i--)   // For the right part that particular element
+            {
+                if(nums[i+1]==1)
+                    right[i]=right[i+1]+1;
+                else
+                    right[i]=0;
+            }
+        
+        int res=max(right[0],left[n-1]);
+        
+        for(int i=0;i<n;i++)
+        {
+            res=max(res,left[i]+right[i]);
+        }
+        
+        return res; 
+    }
+};
