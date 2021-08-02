@@ -1,0 +1,86 @@
+T.C-O(N^2)
+S.C-O(N)
+
+class Solution {
+public:
+    int scoreOfParentheses(string s) {
+        return parenthesesScore(s,0,s.length());
+    }
+    
+    int parenthesesScore(string s,int i,int j)
+    {
+        int res=0;
+        int ans=0;
+        
+        for(int k=i;k<j;k++)
+        {
+            if(s.at(k)=='(')
+                ans+=1;
+            else
+                ans+=(-1);
+            
+            if(ans==0)
+            {
+                if(k-i==1)
+                    res++;
+                else
+                    res+=2*parenthesesScore(s,i+1,k);
+                i=k+1;
+            }
+            
+        }
+        return res;
+    }
+};
+
+
+Approach-2(Using Stack)
+T.C-O(N)
+S.C-O(N)
+
+class Solution {
+public:
+    int scoreOfParentheses(string s) {
+        stack<int>st;
+        int curr=0;
+        
+        for(char c:s)
+        {
+            if(c=='(')
+            {
+                st.push(curr);
+                curr=0;
+            }
+            else{
+                curr+=st.top()+max(1,curr);
+                st.pop();
+            }
+        }
+        return curr;
+    }
+};
+
+Approach-3(using Bit maupulation)
+T.C-O(N)
+S.C-O(1)
+
+class Solution {
+public:
+    int scoreOfParentheses(string s) {
+        int ans=0,res=0;
+        
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.at(i)=='('){
+                ans++;
+            }
+            else{
+                ans--;
+            
+            if(s.at(i-1)=='(')
+                res+=1<<ans;
+            }
+        }
+        return res;
+    }
+};
