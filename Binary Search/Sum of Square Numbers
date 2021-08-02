@@ -1,0 +1,57 @@
+Approach-1(Brute Force)
+
+T.C-O(C)
+S.C-O(1)
+
+
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        for(long a=0;a*a<=c;a++)
+        {
+            for(long b=0;b*b<=c;b++)
+            {
+                if(a*a+b*b==c)
+                    return true;
+            }
+        }
+        return false;
+    }
+};
+
+
+
+APPROACH-2 (Using Binary Search)
+T.C-O(C^1/2 LOG C)
+S.C-O(1)
+
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        
+        if(c<0)
+            return false;
+        
+        long left=0,right=(int)sqrt(c);
+        
+        while(left<=right)
+        {
+           long long  ele = left * left + right * right;
+            
+           if(ele<c)
+           {
+               left++;
+           }
+            else if(ele>c)
+            {
+                right--;
+            }
+            else{
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+
