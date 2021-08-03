@@ -16,12 +16,12 @@ public:
             int curr=q.front();
             q.pop();
             
-            s.insert(curr);
+            visited.insert(curr);
             
             for(int x:rooms[curr])
-                if(s.find(x)==s.end())
+                if(visited.find(x)==visited.end())
                     q.push(x);
         }
-        return s.size()==rooms.size();
+        return visited.size()==rooms.size();
     }
 };
