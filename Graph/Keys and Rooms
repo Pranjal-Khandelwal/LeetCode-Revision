@@ -1,0 +1,27 @@
+Approach-(Using BFS)
+T.C-O(N+E)
+S.C-O(N)
+
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        unordered_set<int>s;
+        
+        queue<int>q;
+        
+        q.push(0);
+        
+        while(!q.empty())
+        {
+            int curr=q.front();
+            q.pop();
+            
+            s.insert(curr);
+            
+            for(int x:rooms[curr])
+                if(s.find(x)==s.end())
+                    q.push(x);
+        }
+        return s.size()==rooms.size();
+    }
+};
