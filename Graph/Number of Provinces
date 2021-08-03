@@ -1,0 +1,44 @@
+T.C-O(N*M)
+S.C-O(1)
+
+
+class Solution {
+public:
+    
+  void dfs(vector<vector<int>>&isConnected,vector<vector<int>>& visited,int row,int col)
+  {
+      
+	if(row<0 || row> isConnected.size() || col<0 || col> isConnected.size()) 
+        return ;
+      
+	visited[row][col]=1;
+	visited[col][row]=1;
+      
+	for(int i=0;i<isConnected[0].size();i++){
+		if(!visited[col][i] && isConnected[col][i] == 1) 
+            dfs(isConnected,visited,col,i);
+	}
+	return ;
+}
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n=isConnected.size();
+        int total_provinces=0;
+        
+        vector<vector<int>>visited(n,vector<int>(n,0));
+        
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(!visited[i][j] && isConnected[i][j]==1)
+                {
+                    dfs(isConnected,visited,i,j);
+                    total_provinces++;
+                }
+            }
+        }
+        return total_provinces;
+    }
+};
