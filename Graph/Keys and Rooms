@@ -25,3 +25,38 @@ public:
         return visited.size()==rooms.size();
     }
 };
+
+Approach-(Using DFS)
+
+T.C-O(N+E)
+S.C-O(N)
+
+
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        unordered_set<int>keys;
+        unordered_set<int>visited;
+        
+        dfs(0,rooms,keys,visited);
+        
+        return visited.size()==rooms.size();
+        
+    }
+    
+    void dfs(int curr,vector<vector<int>>& rooms,unordered_set<int> & keys, unordered_set<int> & visited)
+    {
+        visited.insert(curr);
+        
+        for(int x:rooms[curr])
+        {
+            keys.insert(x);
+            
+            for (int k : keys)
+                if (visited.find(k) == visited.end()) 
+                    dfs(k,rooms,keys,visited);
+        
+        }
+        
+    }
+};
