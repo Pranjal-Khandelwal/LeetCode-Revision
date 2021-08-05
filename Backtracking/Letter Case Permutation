@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<string>res;
+    void letterPermutation(string s,string current,int i)
+    {
+        if(i==s.length()){
+            res.push_back(current); 
+            return;
+        }
+        
+        if(isdigit(s[i]))
+        {
+            current.push_back(s[i]);
+            letterPermutation(s,current,i+1);
+        }
+        else{
+            string c1=current;
+            c1.push_back(tolower(s[i]));
+            letterPermutation(s,c1,i+1);
+            
+            string c2=current;
+            c2.push_back(toupper(s[i]));
+            letterPermutation(s,c2,i+1);
+        }
+    }
+    vector<string> letterCasePermutation(string s) {
+        letterPermutation(s,"",0);
+        
+        return res;
+    }
+};
