@@ -1,0 +1,69 @@
+Approach-1(Using Brute Force Approach)
+T.C-O(N^2)
+S.C-O(1)
+
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        
+        int maxLength=0;
+        // Your code here
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            int zeros=0,ones=0;
+            
+            for(int j=i;j<nums.size();j++)
+            {
+                if(nums[j]==0){
+                zeros++;
+                }
+                else{
+                ones++;
+                }
+                
+                if(zeros==ones)
+                maxLength=max(maxLength,j-i+1);
+            }
+        }
+        return maxLength;
+    }
+};
+
+
+Approach-2(Using Hashmap)
+T.C-O(N)
+S.C.-O(N)
+
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        unordered_map<int,int>mp;
+        
+        int sum=0,maxLen=0;
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]==0){
+                sum+=(-1);
+            }
+            else{
+                sum+=1;
+            }
+            
+            if(sum==0){
+                maxLen=max(maxLen,i+1);
+                
+        }
+        
+        if(mp.find(sum)!=mp.end())
+        {
+            maxLen=max(maxLen,i-mp[sum]);
+        }else{
+            mp[sum]=i;
+        }
+            
+    }
+        return maxLen;
+    }
+};
