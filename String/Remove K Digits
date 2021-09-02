@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        
+          int n=num.size();
+        
+        while(k>0){
+        
+        int i=0;
+        while(i+1<n && num[i]<=num[i+1])
+            i++;
+            num.erase(i,1);
+            k--;
+        }
+        
+        int s=0;
+        
+        while (s<n-1 && num[s]=='0')
+            s++;
+            
+        num.erase(0,s);
+        
+        if(num=="")
+            return "0";
+        else
+            return num;
+    }
+};
