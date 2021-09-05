@@ -1,3 +1,5 @@
+Approach-1(Stack+HashMap)
+
 class FreqStack {
 public:
     map<int, int> f;
