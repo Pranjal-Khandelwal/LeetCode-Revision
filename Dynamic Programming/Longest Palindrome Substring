@@ -1,0 +1,43 @@
+Approach-1(Using Brute Force)
+T.C.-O(N^2)
+S.C.-O(1)
+
+class Solution {
+public:
+    bool isPalindrome(string s)
+    {
+        int i=0,j=s.size()-1;
+        
+        while(i<j)
+        {
+            if(s[i++]!=s[j--])
+                return false;
+        }
+        return true;
+    }
+    
+    string longestPalindrome(string s) {
+        
+        int n=s.size();
+        
+        if(n==0)
+            return "";
+        
+        if(n==1)
+            return s;
+        
+        string res="";
+        for(int i=0;i<n-1;i++)
+        {
+            for(int j=1;j<=n-i;j++)
+            {
+                if(isPalindrome(s.substr(i,j)))
+                {
+                   if(res.size()<j)
+                       res=s.substr(i,j);
+                }
+            }
+        }
+        return res;
+    }
+};
