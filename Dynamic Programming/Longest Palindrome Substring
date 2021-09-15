@@ -1,5 +1,5 @@
 Approach-1(Using Brute Force)
-T.C.-O(N^2)
+T.C.-O(N^3)
 S.C.-O(1)
 
 class Solution {
