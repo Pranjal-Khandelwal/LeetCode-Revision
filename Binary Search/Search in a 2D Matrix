@@ -21,7 +21,7 @@ public:
 };
 
 Approach-2 (Binary Search)
-T.C-O(logn)
+T.C-O(m+n)
 S.C-O(1)
 
 class Solution {
