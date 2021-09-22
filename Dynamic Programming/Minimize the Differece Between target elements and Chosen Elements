@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int m,n;
+    
+    int dp[72][5000];
+    int minimizeDifference(vector<vector<int>>& mat,int row,int sum,int &target)
+    {
+        if(row==m)
+            return abs(sum-target);
+        
+        int min_diff=INT_MAX;
+        
+        if(dp[row][sum]!=-1)
+            return dp[row][sum];
+        
+        for(int i=0;i<n;i++)
+        {
+            min_diff=min(min_diff,minimizeDifference(mat,row+1,sum+mat[row][i],target));
+        }
+        return dp[row][sum]= min_diff;
+        
+    }
+    int minimizeTheDifference(vector<vector<int>>& mat, int target) {
+        m=mat.size();
+        n=mat[0].size();
+        
+        memset(dp,-1,sizeof(dp));
+        
+    return minimizeDifference(mat, 0, 0, target);;
+        
+    }
+};
