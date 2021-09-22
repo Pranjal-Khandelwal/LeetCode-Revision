@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void populatingNode(Node* leftNode,Node* rightNode)
+    {
+        if(!leftNode)
+            return ;
+        
+        leftNode->next=rightNode;
+        populatingNode(leftNode->left,leftNode->right);
+        populatingNode(leftNode->right,rightNode->left);
+        populatingNode(rightNode->left,rightNode->right);
+            
+    }
+    Node* connect(Node* root) {
+        if(root!=NULL)
+            populatingNode(root->left,root->right);
+            return root;
+        
+    }
+};
