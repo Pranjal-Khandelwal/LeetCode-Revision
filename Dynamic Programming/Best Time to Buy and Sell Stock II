@@ -1,0 +1,26 @@
+Appproach-1(Brute Force)
+
+T.C.-O(N^2)
+S.C.-O(1)
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        
+        int max_profit=0;
+        int sum=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n && prices[j]>prices[i];j++)
+            {
+                    sum+=prices[j]-prices[i];
+                if(sum>max_profit)
+                    max_profit=sum;
+                break;
+                }
+        }
+        return max_profit;
+    }
+};
