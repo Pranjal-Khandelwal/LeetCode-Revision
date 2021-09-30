@@ -1,4 +1,36 @@
-Approach-(Using Unordered_map)
+Approach-1(Brute Force Solution)
+T.C.-O(N^2)
+S.C.-O(1)
+
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        
+        vector<int>v;
+        
+        for(int i=0;i<n;i++)
+        {
+            int value=nums[i];
+            int counting =0;
+            
+            for(int j=0;j<n;j++)
+            {
+                if(nums[j]==value)
+                    counting++;
+            }
+            
+            if(counting>n/3 && !count(v.begin(), v.end(), value) ){
+            v.push_back(value);
+            }
+        }
+        return v;
+    }
+};
+
+
+
+Approach-2 (Using Unordered_map)
 T.C.-O(N)
 S.C.-O(N)
 
