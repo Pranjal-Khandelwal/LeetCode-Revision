@@ -1,6 +1,6 @@
-Approach-2(Using Hashmap)
-T.C-O(N)
-S.C-O(N)
+Approach-(Using Unordered_map)
+T.C.-O(N)
+S.C.-O(N)
 
 class Solution {
 public:
@@ -9,16 +9,14 @@ public:
         vector<int>res;
         unordered_map<int,int>mp;
         
-        for(auto x:nums)
+        for(int i=0;i<n;i++)
         {
-            mp[x]++;
+            mp[nums[i]]++;
         }
         
-        for(auto y:mp)
-        {
-           if(y.second>n/3) 
-               res.push_back(y.first);
-               
+        for(auto x:mp){
+          if(x.second>n/3)
+                res.push_back(x.first);  
         }
         return res;
     }
