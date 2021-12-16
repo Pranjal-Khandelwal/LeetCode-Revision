@@ -1,0 +1,74 @@
+Approach-1(Using Recursion)
+
+class Solution {
+public:
+    vector<string>Combination(string D,int i,map<int,string>&mp)
+    {
+        if(i==D.size())
+            return {""};
+        
+        vector<string>temp=Combination(D,i+1,mp);
+        vector<string>res;
+        
+        for(auto x:mp[D[i]-'0'])
+        {
+            for(auto ch:temp)
+            {
+                res.push_back(x+ch);
+            }
+        }
+        return res;
+    }
+    vector<string> letterCombinations(string digits) {
+        
+        if(digits.size()==0)
+            return {};
+        map<int,string>mp;
+        
+        mp[0]="0";
+        mp[1]="1";
+        mp[2]="abc";
+        mp[3]="def";
+        mp[4]="ghi";
+        mp[5]="jkl";
+        mp[6]="mno";
+        mp[7]="pqrs";
+        mp[8]="tuv";
+        mp[9]="wxyz";
+        
+        return Combination(digits,0,mp);
+    }
+};
+
+Approach-2(Using Queue)
+
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string>v={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        
+        if(digits.empty())
+            return {};
+        
+        queue<string>q;
+        vector<string>res;
+        
+        q.push("");
+        
+        while(!q.empty())
+        {
+           string curr=q.front();
+            q.pop();
+            
+            if(curr.size()==digits.size())
+                res.push_back(curr);
+            else{
+                string s = v[digits[curr.size()] - '0'];
+                for(auto x: s)
+                    q.push(curr + x);
+            }
+            
+        }
+        return res;
+        }
+};
