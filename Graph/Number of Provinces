@@ -42,3 +42,78 @@ public:
         return total_provinces;
     }
 };
+
+Approach-2(Using Union Find)
+class Solution {
+public:
+    int findPar(vector<int>& parent,int node)
+    {
+        if(parent[node]==-1){
+            return node;
+        }
+        else{
+            return parent[node]=findPar(parent,parent[node]);
+        }
+    }
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        vector<int>parent(isConnected.size(),-1);
+        int provinces=isConnected.size();
+        
+        for(int i=0;i<isConnected.size();i++)
+        {
+            for(int j=0;j<isConnected[0].size();j++)
+            {
+                if(isConnected[i][j]==1)
+                {
+                    int u=findPar(parent,i);
+                    int v=findPar(parent,j);
+                    
+                    if(u!=v){
+                        provinces--;
+                    parent[u]=v;
+                }
+                }
+
+                }
+        }  
+        return provinces;
+    }
+};
+Approach-2(Using Union Find)
+class Solution {
+public:
+    int findPar(vector<int>& parent,int node)
+    {
+        if(parent[node]==-1){
+            return node;
+        }
+        else{
+            return parent[node]=findPar(parent,parent[node]);
+        }
+    }
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        vector<int>parent(isConnected.size(),-1);
+        int provinces=isConnected.size();
+        
+        for(int i=0;i<isConnected.size();i++)
+        {
+            for(int j=0;j<isConnected[0].size();j++)
+            {
+                if(isConnected[i][j]==1)
+                {
+                    int u=findPar(parent,i);
+                    int v=findPar(parent,j);
+                    
+                    if(u!=v){
+                        provinces--;
+                    parent[u]=v;
+                }
+                }
+
+                }
+        }  
+        return provinces;
+    }
+};
