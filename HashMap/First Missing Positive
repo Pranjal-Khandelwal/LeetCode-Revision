@@ -1,34 +1,26 @@
-Approach-1(Using Btrute Force)
+Approach-1(Using Brute Force)
 
 T.C-O(N)
 S.C.-O(N)
 
 class Solution {
 public:
-    int firstMissingPositive(vector<int>& nums) {
-        int n=nums.size();
-        int res;
-        bool store[n+1];
-        
-        for(int i=0;i<=n;i++)
-            store[i]=false;
-        
-        
-        for(int i=0;i<n;i++)
-        {
-            if(nums[i]>0 && nums[i]<=n)
-                store[nums[i]-1]=true;
+ int firstMissingPositive(vector<int>& nums){
+  unordered_map<int ,int>m ; 
+        for(int i=0 ; i<nums.size() ; i++){
+            if(nums[i]>0){
+            m[nums[i]]++ ;
+            } 
         }
-        
-        for(int i=0;i<=n;i++)
-            if(store[i]==false)
-            {
-                res=i+1;
-                break;
+        int i ; 
+        for( i=1 ; i<=nums.size() ; i++){
+            if(m.find(i)==m.end()){
+                return i ; 
             }
-        return res;
+        }
+        return (nums.size()+1) ; 
     }
-};
+
 
 Approach-2(Optimized without using extra space)
 T.C.-O(N)
