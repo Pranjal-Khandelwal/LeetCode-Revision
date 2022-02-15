@@ -21,9 +21,66 @@ public:
         return maxArea;
     }
 };
-Approach-2(Using Stack)
+
+Approach-2(using satck two pass)
+T.C.-O(N)
+S.C.-O(N)+O(N)
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int n=heights.size();
+        stack<int>st;
+        
+        vector<int>left(n,-1),right(n,n+1);
+        
+        // smaller element to left
+        for(int i=0;i<n;i++)
+        {
+            int pseudo_index=-1;
+            while(!st.empty() && heights[i]<=heights[st.top()])
+            st.pop();
+            
+            if(st.empty())
+                left[i]=pseudo_index;
+            else
+                left[i]=st.top();
+            
+            st.push(i);
+        }
+        
+        // pop all elements of the left index to store right index
+        while(!st.empty())
+            st.pop();
+        
+        // smaller element to right
+        for(int i=n-1;i>=0;i--)
+        {
+            int pseudo_index=n;
+            while(!st.empty() && heights[i]<=heights[st.top()])
+                st.pop();
+            
+            if(st.empty())
+                right[i]=pseudo_index;
+            else
+                right[i]=st.top();
+            
+            st.push(i);       
+        }
+        
+        int max_Area=0;
+        for(int j=0;j<n;j++)
+        {
+            max_Area=max(max_Area,heights[j]*(right[j]-left[j]-1));
+        }
+      return max_Area;  
+    }
+};
+
+
+Approach-3(Using Stack on pass)
 T.C-O(N)
-S.C-O(1)
+S.C-O(N)
 
 class Solution {
 public:
