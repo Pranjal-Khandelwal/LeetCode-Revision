@@ -1,0 +1,64 @@
+Approach-1(Using Brute Force Approach)
+T.C.-O(N^2)
+S.C.-O(1)
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+        int sum=0;
+        
+        for(int i=1;i<n-1;i++)
+        {
+            int left=height[i];
+            
+            for(int j=0;j<i;j++)
+            {
+                left=max(left,height[j]);
+            }
+            
+            int right=height[i];
+            
+            for(int j=i+1;j<n;j++)
+            {
+                right=max(right,height[j]);
+            }
+            
+            sum+=min(left,right)-height[i];
+        }
+        return sum;
+    }
+};
+
+Approach-2(Using Precomputation of left and right max value)------BETTER
+T.C.-O(N)
+S.C.-O(2N)
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+        int sum=0;
+        
+        int maxL[n],maxR[n];
+        
+        maxL[0]=height[0];
+        
+        for(int i=1;i<n;i++)
+        {
+        maxL[i]=max(maxL[i-1],height[i]);
+        }
+        
+        maxR[n-1]=height[n-1];
+        for(int i=n-2;i>=0;i--){
+            maxR[i]=max(maxR[i+1],height[i]);
+        }
+        
+    
+        for(int i=0;i<n;i++)
+        {
+            sum+=min(maxL[i],maxR[i])-height[i];
+        }
+          return sum;
+    }
+};
