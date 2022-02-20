@@ -1,3 +1,8 @@
+APPROACH-1(Brute Force)
+
+T.C.-O(1)
+S.C.-O(N)
+
 class MyHashSet {
 public:
     vector<int>v;
@@ -16,5 +21,55 @@ public:
     
     bool contains(int key) {
         return v[key];
+    }
+};
+
+Approach-2(Using concept of collision)
+
+class MyHashSet {
+public:
+    vector<list<int>>v;
+    int size;
+    MyHashSet() {
+        size=1e6+1;
+        v.resize(size);
+    }
+    
+    int hash(int key)
+    {
+        return key % size;
+    }
+    
+    list<int> :: iterator search(int key)
+    {
+        int index=hash(key);
+    return find(v[index].begin(),v[index].end(),key);
+}
+    
+    void add(int key) {
+        
+        if(contains(key))
+            return;
+        
+        int index=hash(key);
+        v[index].push_back(key);
+    }
+    
+    void remove(int key) {
+        if(!contains(key))
+            return;
+            
+        int index=hash(key);
+        
+        v[index].erase(search(key));
+    }
+    
+    bool contains(int key) {
+        int index=hash(key);
+        
+        if(search(key)!=v[index].end())
+            return true;
+        else 
+            return false;
     }
 };
