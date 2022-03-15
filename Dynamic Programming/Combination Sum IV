@@ -1,0 +1,59 @@
+Approach-1(Using Recursion)
+T.C.-O(N^T) WHERE N is number of elements and T is Target value.
+S.C.-O(T)
+
+class Solution {
+public:
+    int combinationSum(vector<int>& nums,int target,vector<int>& dp)
+    {
+        int n=nums.size();
+        if(target==0)
+            return 1;
+        
+        if(dp[target]!=-1)
+            return dp[target];
+        
+        dp[target]=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]<=target)
+            dp[target]+=combinationSum(nums,target-nums[i],dp);
+        }
+        return dp[target];
+    }
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<int>dp(target+1,-1);
+        return combinationSum(nums,target,dp);
+    }
+};
+
+Approach-2(Memoization)
+T.C.-O(N*T)
+S.C.-O(N)
+
+class Solution {
+public:
+    int combinationSum(vector<int>& nums,int target,vector<int>& dp)
+    {
+        int n=nums.size();
+        if(target==0)
+            return 1;
+        
+        if(dp[target]!=-1)
+            return dp[target];
+        
+        dp[target]=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]<=target)
+            dp[target]+=combinationSum(nums,target-nums[i],dp);
+        }
+        return dp[target];
+    }
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<int>dp(target+1,-1);
+        return combinationSum(nums,target,dp);
+    }
+};
