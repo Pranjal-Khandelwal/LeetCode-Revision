@@ -57,3 +57,29 @@ public:
         return combinationSum(nums,target,dp);
     }
 };
+
+Approach-3(Using Tabulation)
+T.C.-O(N*T)
+S.C.-O(T)
+
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        int n=nums.size();
+        long long int dp[target+1];
+        
+        dp[0]=1;
+        
+        
+        for(int i=1;i<=target;i++){
+            dp[i]=0;
+        for(int num:nums){
+            if(num<=i)
+                dp[i]+=dp[i-num];
+            if(dp[i]>INT_MAX)
+                break;
+        }
+        }
+        return dp[target];
+    }
+};
