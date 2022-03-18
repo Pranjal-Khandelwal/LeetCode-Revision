@@ -39,7 +39,7 @@ public:
     }
 };
 
-Approach-2(Sliding Window)
+Approach-2(Sliding Window Approach)-------Optimized Code
 T.C.-O(N)
 S.C.-O(1)
 
