@@ -1,0 +1,35 @@
+METHOD-2(Using Union Find)
+T.C.-O(N+E*N^2)
+S.C-O(N)
+
+class Solution {
+public:
+      vector<int> parent;
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n=edges.size();
+        
+        parent.resize(n+1);
+        for (int i = 0; i < parent.size(); i++)
+            parent[i] = i;
+        
+        for (auto it : edges)
+            if (find(it[0]) == find(it[1])) 
+                return it;
+            else 
+                uniun(it[0],it[1]);
+        
+        return edges[0];
+    }
+    
+   
+    int find(int x) {
+        if (x != parent[x]) 
+            parent[x] = find(parent[x]);
+        
+        return parent[x];
+    }
+    
+    void uniun(int x, int y) {
+        parent[find(y)] = find(x);
+    }
+};
