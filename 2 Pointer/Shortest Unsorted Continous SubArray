@@ -1,0 +1,27 @@
+Approach-1(Brute Force)
+T.C.-O(N)
+S.C.-O(N)
+
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        int n=nums.size();
+        
+        int left=n-1,right=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(nums[i]>nums[j]){
+                    left=min(left,i);
+                    right=max(right,j);
+                }
+            }
+        }
+        
+        if(right-left>0)
+            return right-left+1;
+        else
+            return 0;
+    }
+};
