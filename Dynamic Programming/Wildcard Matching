@@ -1,0 +1,89 @@
+Approach-1
+T.C.-O(2^N)
+S.C.-O(N)
+
+class Solution {
+public:
+    int pattMatch(string& s,int i,string& p,int j)
+    {
+        if(i<0 && j<0)
+            return true;
+        
+        if(i>=0 && j<0)
+            return false;
+        
+        if(i<0 && j>=0)
+        {
+               for(int jj=0;jj<=j;jj++)
+               {
+                   if(p[jj]!='*')
+                       return false;
+               }
+            return true;
+        }
+        
+        
+        if(s[i]==p[j] || p[j]=='?'){
+            return pattMatch(s,i-1,p,j-1);
+        }
+        
+        if(p[j]=='*'){
+            return pattMatch(s,i,p,j-1) or pattMatch(s,i-1,p,j);
+        }
+        return false;
+    }
+    bool isMatch(string s, string p) {
+        int m=s.size();
+        int n=p.size();
+        
+    return pattMatch(s,m-1,p,n-1);    
+    }
+};
+
+Approach-2(Using Memoization)
+T.C.-O(N^2)
+S.C.-O(N^2)
+
+class Solution {
+public:
+    int pattMatch(string& s,int i,string& p,int j,vector<vector<int>>& dp)
+    {
+        if(i<0 && j<0)
+            return true;
+        
+        if(i>=0 && j<0)
+            return false;
+        
+        if(i<0 && j>=0)
+        {
+               for(int jj=0;jj<=j;jj++)
+               {
+                   if(p[jj]!='*')
+                       return false;
+               }
+            return true;
+        }
+        
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        
+        if(s[i]==p[j] || p[j]=='?'){
+            return dp[i][j]=pattMatch(s,i-1,p,j-1,dp);
+        }
+        
+        if(p[j]=='*'){
+            return dp[i][j]=pattMatch(s,i,p,j-1,dp) or pattMatch(s,i-1,p,j,dp);
+        }
+        
+        return dp[i][j]=false;
+    }
+    
+    bool isMatch(string s, string p) {
+        int m=s.size();
+        int n=p.size();
+        
+        vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
+        
+    return pattMatch(s,m-1,p,n-1,dp);    
+    }
+};
