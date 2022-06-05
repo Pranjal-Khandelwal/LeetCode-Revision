@@ -1,0 +1,72 @@
+Approach-1(Recursion)
+T.C.-O(2^N)
+S.C.-O(N)
+
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int n = stones.size();
+        
+        map<int, int> mp;
+        for(int i=0; i<n; i++){
+            mp[stones[i]] = i;
+        }
+        return frogJump(stones, mp, 0, 0);
+    }
+    
+    bool frogJump(vector<int>& stones, map<int, int> &mp, int start, int jump){
+        int n=stones.size();
+        
+        if(start == n-1) 
+            return 1;
+        
+        for(int i=jump-1; i<=jump+1; i++){
+            if(i> 0 && mp.find(stones[start]+i) != mp.end()){
+                int ind = mp[stones[start]+i];
+                
+                if(frogJump(stones, mp, ind, i))
+                    return 1;
+            }
+        }
+        return 0;
+    }
+};
+
+Approach-2(Memoization)
+T.C.-O(N^2)
+S.C.-O(N^2)
+
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int n = stones.size();
+        
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        
+        map<int, int> mp;
+        for(int i=0; i<n; i++){
+            mp[stones[i]] = i;
+        }
+        return frogJump(stones, mp, 0, 0,dp);
+    }
+    
+    bool frogJump(vector<int>& stones, map<int, int> &mp, int start, int jump, vector<vector<int>>& dp){
+        int n=stones.size();
+        
+        if(start == n-1) 
+            return dp[start][jump]=1;
+        
+        if(dp[start][jump]!=-1)
+            return dp[start][jump];
+        
+        for(int i=jump-1; i<=jump+1; i++){
+            if(i> 0 && mp.find(stones[start]+i) != mp.end()){
+                int ind = mp[stones[start]+i];
+                
+                if(frogJump(stones, mp, ind, i,dp))
+                    return dp[start][jump]=1;
+            }
+        }
+        return dp[start][jump]=0;
+    }
+};
