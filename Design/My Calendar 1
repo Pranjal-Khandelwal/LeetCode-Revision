@@ -1,0 +1,48 @@
+Approach-1(Brute Force)
+T.C.-O(N^2)
+S.C.-O(N)
+
+class MyCalendar {
+public:
+    vector<pair<int,int>>booking;
+    MyCalendar() {
+        booking={};
+    }
+    
+    bool book(int start, int end) {
+        for(auto it:booking)
+        {
+            if(start>=it.second || end<=it.first)
+                continue;
+            else
+                return false;
+        }
+        booking.push_back({start,end});
+        return true;
+    }
+};
+
+Appraoch-2(Binary Search+map)
+T.C.-O(NLOGN)
+S.C.-O(1)
+
+class MyCalendar {
+public:
+    map<int,int>mp;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int start, int end) {
+        auto it=mp.upper_bound(start);
+        
+        if(it==mp.end() || end<=it->second)
+        {
+            mp[end]=start;
+            return true;
+        }
+       return false;
+    }
+};
+
+/**
