@@ -1,0 +1,96 @@
+Approach-1(Using Recursion)-----Exponential Appraoch
+class Solution {
+public:
+    int dishes(int index,int time,vector<int>& satisfaction)
+    {
+        int n=satisfaction.size();
+        
+        if(index==n)
+            return 0;
+        
+        //Either i will take the value or i will not
+        
+        //I will take 
+        int take= satisfaction[index]*(time+1) + dishes(index+1,time+1,satisfaction);
+        
+        //not take
+        int not_take = dishes(index+1,time,satisfaction);
+        
+        return max(take,not_take);
+    }
+    int maxSatisfaction(vector<int>& satisfaction) {
+        int n=satisfaction.size();
+        
+        sort(satisfaction.begin() , satisfaction.end());
+        
+        return dishes(0,0,satisfaction);
+        
+    }
+};
+
+Approach-2(Using Dp--Memoization)---Better
+class Solution {
+public:
+    int dishes(vector<int>&satisfaction , int index , int time,vector<vector<int>>&dp){
+    int n=satisfaction.size();
+    // checking base conditon , if index has reached the end point the no need to calc further
+    if(index==n) return 0;
+    
+    //if dp has already valued stored  in it
+    if(dp[index][time]!=-1){
+        return dp[index][time];
+    }
+    
+    
+    int take = satisfaction[index]*(time+1) + dishes(satisfaction , index+1 , time+1,dp);
+    
+    
+    int not_take = dishes(satisfaction , index+1 , time,dp);
+    
+    //storing the maximum ans in dp 
+    dp[index][time]=max(take , not_take);
+    
+    //
+    return dp[index][time];
+    
+    
+}
+
+
+    int maxSatisfaction(vector<int>& satisfaction) {
+        int n=satisfaction.size();    
+        sort(satisfaction.begin() , satisfaction.end());
+    
+    //formation of 2D dp vector
+    vector<vector<int>> dp(n+1 , vector<int>(n+1 ,-1));
+    
+    return dishes(satisfaction , 0 , 0,dp);
+        
+    }
+};
+
+Appraoch-3(using Greedy)----optimized
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& satisfaction) {
+        int n=satisfaction.size();
+        
+        sort(satisfaction.begin(),satisfaction.end());
+        
+        int sum=0;
+        
+        for(int i=n-1;i>0;i--)
+        {
+           satisfaction[i-1] = satisfaction[i-1]+satisfaction[i];
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+         if(satisfaction[i]>0)
+         {
+             sum+=satisfaction[i];
+         }
+        }
+        return sum;
+    }
+};
