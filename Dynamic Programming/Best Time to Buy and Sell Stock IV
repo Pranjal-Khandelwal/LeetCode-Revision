@@ -1,0 +1,74 @@
+Approach-1(Recursion)
+class Solution {
+public:
+    int maxProfitUtil(vector<int>& prices,int currDay,int transaction,int k,bool canBuy)
+    {
+        int n=prices.size();
+        
+        if(currDay>=n || transaction>=k)
+            return 0;
+        
+        int res=0;
+        
+        if(canBuy)
+        {
+            int idle=maxProfitUtil(prices,currDay+1,transaction,k,canBuy);
+            int buy=-prices[currDay]+maxProfitUtil(prices,currDay+1,transaction,k,!canBuy);
+            
+            res=max(idle,buy);
+        }
+        else{
+           int idle=maxProfitUtil(prices,currDay+1,transaction,k,canBuy);
+           int sell= prices[currDay]+maxProfitUtil(prices,currDay+1,transaction+1,k,!canBuy);
+            
+            res=max(idle,sell);
+        }
+       return res; 
+    }
+    
+    int maxProfit(int k, vector<int>& prices) {
+        int n=prices.size();
+        
+        return maxProfitUtil(prices,0,0,k,true);
+    }
+};
+
+Approach-2(DP)
+class Solution {
+public:
+    int maxProfitUtil(vector<int>& prices,int currDay,int transaction,int k,bool canBuy,vector<vector<vector<int>>>& dp)
+    {
+        int n=prices.size();
+        
+        if(currDay>=n || transaction>=k)
+            return 0;
+        
+        if(dp[currDay][canBuy][transaction]!=-1)
+            return dp[currDay][canBuy][transaction];
+        
+        int res=0;
+        
+        if(canBuy)
+        {
+            int idle=maxProfitUtil(prices,currDay+1,transaction,k,canBuy,dp);
+            int buy=-prices[currDay]+maxProfitUtil(prices,currDay+1,transaction,k,!canBuy,dp);
+            
+            dp[currDay][canBuy][transaction]=max(idle,buy);
+        }
+        else{
+           int idle=maxProfitUtil(prices,currDay+1,transaction,k,canBuy,dp);
+           int sell= prices[currDay]+maxProfitUtil(prices,currDay+1,transaction+1,k,!canBuy,dp);
+            
+            dp[currDay][canBuy][transaction]=max(idle,sell);
+        }
+       return dp[currDay][canBuy][transaction]; 
+    }
+    
+    int maxProfit(int k, vector<int>& prices) {
+        int n=prices.size();
+        
+        vector<vector<vector<int>>>dp(n,vector<vector<int>>(2,vector<int>(k+1,-1)));
+        
+        return maxProfitUtil(prices,0,0,k,true,dp);
+    }
+};
